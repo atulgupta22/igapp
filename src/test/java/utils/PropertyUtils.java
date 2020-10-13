@@ -20,23 +20,15 @@ public class PropertyUtils {
         return PropertyUtils.INSTANCE;
     }
 
-    /**
-     * This method can read Property value for any given key
-     *
-     * @param key
-     * @return
-     */
+
+    // This method can read Property value for any given key
+
     public static String getProperty(final String key) {
         return PropertyUtils.getInstance().props.getProperty(key);
     }
 
-    /**
-     * This method will read any integer property value
-     *
-     * @param key
-     * @param defaultValue
-     * @return
-     */
+    // This method will read any integer property value
+
     public static int getIntegerProperty(final String key, final int defaultValue) {
         int integerValue = 0;
         final String value = PropertyUtils.getInstance().props.getProperty(key);
@@ -47,22 +39,14 @@ public class PropertyUtils {
         return integerValue;
     }
 
-    /**
-     * If key couldn't be found then it will return default value
-     *
-     * @param key
-     * @param defaultValue
-     * @return
-     */
+    // If key couldn't be found then it will return default value
+
     public static String getProperty(final String key, final String defaultValue) {
         return PropertyUtils.getInstance().props.getProperty(key, defaultValue);
     }
 
-    /**
-     * This method will load properties file in Properties object
-     *
-     * @param path
-     */
+    // This method will load properties file in Properties object
+
     public void loadProperties(final String path) {
         InputStream inputStream = null;
         try {

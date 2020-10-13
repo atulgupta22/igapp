@@ -68,8 +68,16 @@ abstract class BaseClass {
         String APP_ACTIVITY_NAME = PropertyUtils.getProperty("android.app.activityName");
         String APP_FULL_RESET = PropertyUtils.getProperty("android.app.full.reset");
         String APP_NO_RESET = PropertyUtils.getProperty("android.app.no.reset");
+        String BROWSER_STACK_USER = PropertyUtils.getProperty("browserstack.user");
+        String BROWSER_STACK_KEY = PropertyUtils.getProperty("browserstack.key");
+        String BROWSER_STACK_APP = PropertyUtils.getProperty("browserstack.app");
+        String BROWSER_STACK_DEVICE = PropertyUtils.getProperty("browserstack.device");
 
-        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
+        desiredCapabilities.setCapability("browserstack.user", BROWSER_STACK_USER);
+        desiredCapabilities.setCapability("browserstack.key", BROWSER_STACK_KEY);
+        desiredCapabilities.setCapability("app", BROWSER_STACK_APP);
+        desiredCapabilities.setCapability("device", BROWSER_STACK_DEVICE);
+
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM_NAME);
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PLATFORM_VERSION);
