@@ -1,56 +1,56 @@
 package testcases;
 
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utils.PropertyUtils;
-//import utils.ScreenshotUtility;
-import utils.WaitUtils;
-import java.io.File;
-import java.io.IOException;
+import utils.WaitUtils;;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 //Responsible for setting up the Appium test Driver
-
-//@Listeners({ScreenshotUtility.class})
 abstract class BaseClass {
     public static AppiumDriver driver;
     public final static String APPIUM_SERVER_URL = PropertyUtils.getProperty("appium.server.url", "http://127.0.0.1:4723/wd/hub");
     public final static int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
     public static WaitUtils waitUtils = new WaitUtils();
 
-    @BeforeMethod
+    @BeforeClass
     public void setUpAppium() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setDesiredCapabilitiesForAndroid(capabilities);
         driver = new AppiumDriver(new URL(APPIUM_SERVER_URL), capabilities);
     }
 
+//    @BeforeSuite
+//    public void reportSetup(){
+//        //ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("report.html");
+//
+//
+//    }
+
     /**
      * This method will be called everytime before your test runs
      */
-    @BeforeTest
-    public abstract void setUpPage();
+//    @BeforeTest
+//    public abstract void setUpPage();
+//
 
+//    @AfterMethod(alwaysRun = true)
+//    public void afterMethod(final ITestResult result) throws IOException {
+//        String fileName = result.getTestClass().getName() + "_" + result.getName();
+//        System.out.println("Test Case: [" + fileName + "] executed..!");
+//    }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod(final ITestResult result) throws IOException {
-        String fileName = result.getTestClass().getName() + "_" + result.getName();
-        System.out.println("Test Case: [" + fileName + "] executed..!");
-    }
+//    @AfterClass
+//    public void afterClass() {
+//    }
 
     @AfterClass
-    public void afterClass() {
-    }
-
-    @AfterSuite
     public void tearDownAppium() {
         quitDriver();
     }
@@ -99,10 +99,10 @@ abstract class BaseClass {
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
     }
 
-    private static String getAbsolutePath(String appRelativePath) {
-        File file = new File(appRelativePath);
-        return file.getAbsolutePath();
-    }
+//    private static String getAbsolutePath(String appRelativePath) {
+//        File file = new File(appRelativePath);
+//        return file.getAbsolutePath();
+//    }
 
     //This will quite the android driver instance
 

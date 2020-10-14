@@ -3,7 +3,7 @@
 <suite name="Testing Mobile Apps">
     <test name="End To End">
         <classes>
-            <class name="testcases.LoginTest"/>
+            <class name="testcases.VerifyLanguageScreen"/>
 
         </classes>
     </test> <!-- Test -->
