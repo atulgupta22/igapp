@@ -58,35 +58,35 @@ abstract class BaseClass {
     //It will set the DesiredCapabilities for the local execution
 
     private void setDesiredCapabilitiesForAndroid(DesiredCapabilities desiredCapabilities) {
-        String PLATFORM_NAME = PropertyUtils.getProperty("android.platform");
-        String PLATFORM_VERSION = PropertyUtils.getProperty("android.platform.version");
-        String APP_NAME = PropertyUtils.getProperty("android.app.name");
-        String APP_RELATIVE_PATH = PropertyUtils.getProperty("android.app.location") + APP_NAME;
-        //String APP_PATH = getAbsolutePath(APP_RELATIVE_PATH);
-        String DEVICE_NAME = PropertyUtils.getProperty("android.device.name");
-        String APP_PACKAGE_NAME = PropertyUtils.getProperty("android.app.packageName");
-        String APP_ACTIVITY_NAME = PropertyUtils.getProperty("android.app.activityName");
-        String APP_FULL_RESET = PropertyUtils.getProperty("android.app.full.reset");
-        String APP_NO_RESET = PropertyUtils.getProperty("android.app.no.reset");
-        String BROWSER_STACK_USER = PropertyUtils.getProperty("browserstack.user");
-        String BROWSER_STACK_KEY = PropertyUtils.getProperty("browserstack.key");
-        String BROWSER_STACK_APP = PropertyUtils.getProperty("browserstack.app");
-        String BROWSER_STACK_DEVICE = PropertyUtils.getProperty("browserstack.device");
-
-        desiredCapabilities.setCapability("browserstack.user", BROWSER_STACK_USER);
-        desiredCapabilities.setCapability("browserstack.key", BROWSER_STACK_KEY);
-        desiredCapabilities.setCapability("app", BROWSER_STACK_APP);
-        desiredCapabilities.setCapability("device", BROWSER_STACK_DEVICE);
-
-        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
-        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM_NAME);
-        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PLATFORM_VERSION);
-        //desiredCapabilities.setCapability(MobileCapabilityType.APP, APP_PATH);
-        desiredCapabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE_NAME);
-        desiredCapabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY_NAME);
-        desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, APP_FULL_RESET);
-        desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, APP_NO_RESET);
-        desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+//        String PLATFORM_NAME = PropertyUtils.getProperty("android.platform");
+//        String PLATFORM_VERSION = PropertyUtils.getProperty("android.platform.version");
+//        String APP_NAME = PropertyUtils.getProperty("android.app.name");
+//        String APP_RELATIVE_PATH = PropertyUtils.getProperty("android.app.location") + APP_NAME;
+//        //String APP_PATH = getAbsolutePath(APP_RELATIVE_PATH);
+//        String DEVICE_NAME = PropertyUtils.getProperty("android.device.name");
+//        String APP_PACKAGE_NAME = PropertyUtils.getProperty("android.app.packageName");
+//        String APP_ACTIVITY_NAME = PropertyUtils.getProperty("android.app.activityName");
+//        String APP_FULL_RESET = PropertyUtils.getProperty("android.app.full.reset");
+//        String APP_NO_RESET = PropertyUtils.getProperty("android.app.no.reset");
+//        String BROWSER_STACK_USER = PropertyUtils.getProperty("browserstack.user");
+//        String BROWSER_STACK_KEY = PropertyUtils.getProperty("browserstack.key");
+//        String BROWSER_STACK_APP = PropertyUtils.getProperty("browserstack.app");
+//        String BROWSER_STACK_DEVICE = PropertyUtils.getProperty("browserstack.device");
+//
+//        desiredCapabilities.setCapability("browserstack.user", BROWSER_STACK_USER);
+//        desiredCapabilities.setCapability("browserstack.key", BROWSER_STACK_KEY);
+//        desiredCapabilities.setCapability("app", BROWSER_STACK_APP);
+//        desiredCapabilities.setCapability("device", BROWSER_STACK_DEVICE);
+//
+//        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+//        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM_NAME);
+//        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PLATFORM_VERSION);
+//        //desiredCapabilities.setCapability(MobileCapabilityType.APP, APP_PATH);
+//        desiredCapabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE_NAME);
+//        desiredCapabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY_NAME);
+//        desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, APP_FULL_RESET);
+//        desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, APP_NO_RESET);
+//        desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
     }
 
 //    public static WebDriver getScreenshotableWebDriver() {
