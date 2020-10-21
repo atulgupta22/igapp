@@ -129,7 +129,7 @@ public class VerifyLanguageScreen extends BaseClass{
         LSS_Obj.enterMobileNumer(LOGIN_MOBILE_NUMBER);
         LSS_Obj.tapOn_ContinueBtn();
         AU_Obj.assertText(LSS_Obj.otpAutoVerificationLabel, "OTP auto-verification");
-        AU_Obj.assertText(LSS_Obj.otpHasBeenSendToLabel, "OTP has been sent to "+LOGIN_MOBILE_NUMBER);
+        AU_Obj.assertText(LSS_Obj.otpHasBeenSendToLabel, "OTP has been sent to "+LOGIN_MOBILE_NUMBER+" ");
         AU_Obj.assertText(LSS_Obj.OTPVerificationText, "OTP verification usually takes less than a minute. Please ensure you are using the same mobile number on this phone as mentioned above. In case there’s a mismatch, tap EDIT and enter the correct number");
         AU_Obj.assertText(LSS_Obj.editMobileNumberBtn, "EDIT");
         LSS_Obj.enterOTP("999999");
