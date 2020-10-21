@@ -1,32 +1,17 @@
-//package testcases;
-//
-//import org.openqa.selenium.By;
-//import utils.CommonUtils;
-//
-//import java.util.concurrent.TimeUnit;
-//
-//
-//
-//public class LoginTest  {
-//
-//    CommonUtils cu = new CommonUtils();
-//     driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-//
-//    //WebDriverWait wait = new WebDriverWait(driver, 20);
-//        driver.findElement(By.xpath("//android.widget.TextView[@text='English']")).click();
-//        mDriver.findElement(By.id("btn_next")).click();
-//
-//}
 package testcases;
 
+import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pageobject.HomeScreenPO;
 import pageobject.LanguageScreenPO;
+import utils.ApiResonseUtils;
 import utils.AssertUtils;
 import utils.WaitUtils;
-
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyLanguageScreen extends BaseClass{
@@ -35,9 +20,10 @@ public class VerifyLanguageScreen extends BaseClass{
 
 
     @Test(priority = 0)
-    public void verify_all_languages() {
+    public void to_verify_all_languages_displayed() throws IOException {
         LanguageScreenPO LS_Obj = new LanguageScreenPO(driver);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //ApiResonseUtils.MyGETRequest();
         AU_Obj.isElementDisplayed(LS_Obj.selectYourPreferredLanguage);
         AU_Obj.isElementDisplayed(LS_Obj.englishLangRadioBtn);
         AU_Obj.isElementDisplayed(LS_Obj.hindiLangRadioBtn);
@@ -47,8 +33,8 @@ public class VerifyLanguageScreen extends BaseClass{
         AU_Obj.isElementDisplayed(LS_Obj.teluguLangRadioBtn);
         AU_Obj.isElementDisplayed(LS_Obj.marathiLangRadioBtn);
         AU_Obj.isElementDisplayed(LS_Obj.gujratiLangRadioBtn);
-
     }
+
     @Test(priority = 1)
     public void verify_languages_radiobtn_clikabale() {
         LanguageScreenPO LS_Obj = new LanguageScreenPO(driver);
@@ -92,15 +78,42 @@ public class VerifyLanguageScreen extends BaseClass{
         WU_Obj.waitForElementToBeVisible(LS_Obj.selectYourPreferredLanguage,driver);
         AU_Obj.assertText(LS_Obj.selectYourPreferredLanguage,"Select your preferred language");
         AU_Obj.assertText(LS_Obj.toChangeItLateGoToMyProfileChangeLanguage,"To change it later, go to My Profile → Change Language");
-
     }
+
     @Test(priority = 2)
     public void verify_continuebtn_clickable(){
         LanguageScreenPO LS_Obj = new LanguageScreenPO(driver);
         LS_Obj.tapOn_continueBtn();
         WU_Obj.waitForElementToBeVisible((By.id("logo_img")),driver);
-
     }
+
+    @Test(priority = 3)
+    public void verify_live_gold_rate() throws IOException {
+        HomeScreenPO HS_Obj = new HomeScreenPO(driver);
+        ApiResonseUtils.MyGETRequest();
+        AU_Obj.assertText(HS_Obj.livePrice, ApiResonseUtils.goldRateInGram);
+        AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange + " since yesterday");
+    }
+    @Test(priority = 4)
+    public void verify_home_screen_element(){
+        HomeScreenPO HS_Obj = new HomeScreenPO(driver);
+        AU_Obj.isElementDisplayed(HS_Obj.liveGoldPriceLabel);
+        AU_Obj.isElementDisplayed(HS_Obj.notificationIcon);
+        AU_Obj.isElementDisplayed(HS_Obj.logInSignUp);
+        AU_Obj.isElementDisplayed(HS_Obj.buy24KGoldLabel);
+        AU_Obj.isElementDisplayed(HS_Obj.startSavingsFrom₹1Label);
+        AU_Obj.isElementDisplayed(HS_Obj.K24goldCoinLabel);
+        AU_Obj.isElementDisplayed(HS_Obj.atABookingPriceOf₹610Label);
+        AU_Obj.isElementDisplayed(HS_Obj.giftGoldLabel);
+        AU_Obj.isElementDisplayed(HS_Obj.toFriendsFamilyAnytimeLabel);
+        AU_Obj.isElementDisplayed(HS_Obj.Home);
+        AU_Obj.isElementDisplayed(HS_Obj.digiGold);
+        AU_Obj.isElementDisplayed(HS_Obj.easyGold);
+        AU_Obj.isElementDisplayed(HS_Obj.goldLoan);
+        AU_Obj.isElementDisplayed(HS_Obj.myProfile);
+    }
+
+
 
 
 

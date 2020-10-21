@@ -12,6 +12,8 @@ public class LanguageScreenPO extends BasePO {
     public LanguageScreenPO(AppiumDriver driver) {
         super(driver);
     }
+    @AndroidFindBy(id = "splashRootLayout")
+    public AndroidElement SplashScreen;
 
     @AndroidFindBy(id="tv_select_language_text")
     public AndroidElement selectYourPreferredLanguage;
