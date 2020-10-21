@@ -8,8 +8,10 @@ import org.testng.annotations.Test;
 
 import pageobject.HomeScreenPO;
 import pageobject.LanguageScreenPO;
+import pageobject.LoginSignUpScreenPO;
 import utils.ApiResonseUtils;
 import utils.AssertUtils;
+import utils.PropertyUtils;
 import utils.WaitUtils;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class VerifyLanguageScreen extends BaseClass{
     WaitUtils WU_Obj = new WaitUtils();
     AssertUtils AU_Obj = new AssertUtils();
+    public final static String LOGIN_MOBILE_NUMBER = PropertyUtils.getProperty("mobilenumber");
 
 
     @Test(priority = 0)
@@ -99,7 +102,7 @@ public class VerifyLanguageScreen extends BaseClass{
         HomeScreenPO HS_Obj = new HomeScreenPO(driver);
         AU_Obj.isElementDisplayed(HS_Obj.liveGoldPriceLabel);
         AU_Obj.isElementDisplayed(HS_Obj.notificationIcon);
-        AU_Obj.isElementDisplayed(HS_Obj.logInSignUp);
+        AU_Obj.isElementDisplayed(HS_Obj.logInSignUpBtn);
         AU_Obj.isElementDisplayed(HS_Obj.buy24KGoldLabel);
         AU_Obj.isElementDisplayed(HS_Obj.startSavingsFrom₹1Label);
         AU_Obj.isElementDisplayed(HS_Obj.K24goldCoinLabel);
@@ -111,6 +114,32 @@ public class VerifyLanguageScreen extends BaseClass{
         AU_Obj.isElementDisplayed(HS_Obj.easyGold);
         AU_Obj.isElementDisplayed(HS_Obj.goldLoan);
         AU_Obj.isElementDisplayed(HS_Obj.myProfile);
+    }
+
+    @Test(priority = 5)
+    public void verify_login_signup_functionality(){
+        HomeScreenPO HS_Obj = new HomeScreenPO(driver);
+        LoginSignUpScreenPO LSS_Obj = new LoginSignUpScreenPO(driver);
+        HS_Obj.tapOn_logInSignUpBtn();
+        WU_Obj.waitForElementToBeVisible(LSS_Obj.loginSignUpLabel,driver);
+        AU_Obj.assertText(LSS_Obj.loginSignUpLabel, "Log in or Sign up");
+        AU_Obj.assertText(LSS_Obj.enterMobileNumberLabel, "Please enter your mobile number to continue");
+        AU_Obj.assertText(LSS_Obj.continueBtn, "CONTINUE");
+        AU_Obj.isElementDisplayed(LSS_Obj.enterSameNumberLabel);
+        LSS_Obj.enterMobileNumer(LOGIN_MOBILE_NUMBER);
+        LSS_Obj.tapOn_ContinueBtn();
+        AU_Obj.assertText(LSS_Obj.otpAutoVerificationLabel, "OTP auto-verification");
+        AU_Obj.assertText(LSS_Obj.otpHasBeenSendToLabel, "OTP has been sent to "+LOGIN_MOBILE_NUMBER);
+        AU_Obj.assertText(LSS_Obj.OTPVerificationText, "OTP verification usually takes less than a minute. Please ensure you are using the same mobile number on this phone as mentioned above. In case there’s a mismatch, tap EDIT and enter the correct number");
+        AU_Obj.assertText(LSS_Obj.editMobileNumberBtn, "EDIT");
+        LSS_Obj.enterOTP("999999");
+        AU_Obj.assertText(LSS_Obj.verifyingOTPLabel, "Verifying OTP automatically");
+
+
+
+
+
+
     }
 
 

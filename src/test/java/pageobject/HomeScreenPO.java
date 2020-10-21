@@ -22,7 +22,7 @@ public class HomeScreenPO extends BasePO {
     public AndroidElement liveGoldPriceLabel;
 
     @AndroidFindBy(id = "tv_btn_your_account")
-    public AndroidElement logInSignUp;
+    public AndroidElement logInSignUpBtn;
 
     @AndroidFindBy(id= "indiagoldHomeFragment")
     public AndroidElement Home ;
@@ -56,6 +56,11 @@ public class HomeScreenPO extends BasePO {
 
     @AndroidFindBy(id = "profileFragment")
     public AndroidElement myProfile;
+
+    public void tapOn_logInSignUpBtn(){
+        logInSignUpBtn.click();
+    }
+
 
 
 }
