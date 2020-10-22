@@ -20,8 +20,8 @@ public class VerifyLanguageScreen extends BaseClass{
     WaitUtils WU_Obj = new WaitUtils();
     AssertUtils AU_Obj = new AssertUtils();
     public final static String LOGIN_MOBILE_NUMBER = PropertyUtils.getProperty("mobilenumber");
-    public String GOLD_LIVE_PRICE_IN_GRAM;
-    public Double GOLD_LIVE_PRICE;
+    public String GOLD_LIVE_PRICE_IN_GRAM_FROM_HOME_SCREEN;
+    public Double GOLD_LIVE_PRICE_FROM_API;
     public Double EXCLUSIVE_GOLD_RATE;
 
     @Test(priority = 0)
@@ -96,8 +96,8 @@ public class VerifyLanguageScreen extends BaseClass{
     public void verify_live_gold_rate() throws IOException {
         HomeScreenPO HS_Obj = new HomeScreenPO(driver);
         ApiResonseUtils.MyGETRequest();
-        GOLD_LIVE_PRICE_IN_GRAM = HS_Obj.livePrice.getText();
-        GOLD_LIVE_PRICE = ApiResonseUtils.goldRate1;
+        GOLD_LIVE_PRICE_IN_GRAM_FROM_HOME_SCREEN = HS_Obj.livePrice.getText();
+        GOLD_LIVE_PRICE_FROM_API = ApiResonseUtils.goldRate1;
         EXCLUSIVE_GOLD_RATE = ApiResonseUtils.exclusiveGoldRate;
         AU_Obj.assertText(HS_Obj.livePrice, ApiResonseUtils.goldRateInGram);
         //AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange + " since yesterday");
@@ -153,7 +153,7 @@ public class VerifyLanguageScreen extends BaseClass{
         AU_Obj.assertText(DGS_Obj.liveBuyingPriceLabel, "LIVE BUYING PRICE");
         //ApiResonseUtils.MyGETRequest();
         //AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, ApiResonseUtils.goldRateInGram);
-        AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, GOLD_LIVE_PRICE_IN_GRAM);
+        AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, GOLD_LIVE_PRICE_IN_GRAM_FROM_HOME_SCREEN);
         AU_Obj.assertText(DGS_Obj.priceTextLabel, "This price includes 3% GST, locker charges and insurance");
         Assert.assertEquals(DGS_Obj.buyInRupeesRadioBtn.getAttribute("checked"),"true");
         Assert.assertEquals(DGS_Obj.buyInQuantityRadioBtn.getAttribute("checked"),"false");
@@ -175,19 +175,19 @@ public class VerifyLanguageScreen extends BaseClass{
         DGS_Obj.tapOn_BuyInRupeesRadioBtn();
         DGS_Obj.tapOn_BuyOption1();
         AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "500");
-        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(500,GOLD_LIVE_PRICE)+" gms");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(500,GOLD_LIVE_PRICE_FROM_API)+" gms");
 
         DGS_Obj.tapOn_BuyOption2();
         AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "1500");
-        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(1500,GOLD_LIVE_PRICE)+" gms");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(1500,GOLD_LIVE_PRICE_FROM_API)+" gms");
 
         DGS_Obj.tapOn_BuyOption3();
         AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "4000");
-        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(4000,GOLD_LIVE_PRICE)+" gms");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(4000,GOLD_LIVE_PRICE_FROM_API)+" gms");
 
         DGS_Obj.tapOn_BuyOption4();
         AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "9000");
-        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(9000,GOLD_LIVE_PRICE)+" gms");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(9000,GOLD_LIVE_PRICE_FROM_API)+" gms");
 
         DGS_Obj.tapOn_BuyInQuantityRadioBtn();
         DGS_Obj.tapOn_BuyOption1();
