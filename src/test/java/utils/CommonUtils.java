@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -58,11 +59,7 @@ public class CommonUtils {
         NEW_COMMAND_TIMEOUT = prop.getProperty("new.command.timeout");
         DEVICE_READY_TIMEOUT = prop.getProperty("device.ready.timeout");
         NO_RESET = prop.getProperty("no.reset");
-
     }
-
-
-
     public static void setMobileAppCapabilities() {
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, CommonUtils.BROWSER_NAME);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, CommonUtils.PLATFORM_VERSION);
@@ -75,11 +72,27 @@ public class CommonUtils {
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, CommonUtils.BASE_PKG);
         capabilities.setCapability(MobileCapabilityType.NO_RESET, CommonUtils.NO_RESET);
     }
-
     public static AppiumDriver getAppiumDriver() throws MalformedURLException {
         serverUrl = new URL("http://localhost:" + APPIUM_PORT + "/wd/hub");
         AppiumDriver driver = new AppiumDriver(serverUrl, capabilities);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         return driver;
     }
+
+    public static String convertAmountintoGm(int amount,double goldliveprice){
+        Double gmquantityfourdecimal= ((long)((amount/goldliveprice)*10000)) / 10000.0;
+        String gm_qunatitySTR = String.valueOf(gmquantityfourdecimal);
+        return gm_qunatitySTR;
+    }
+    public static String convertGmintoRupees(double gm, double exclusiveGoldRate){
+        DecimalFormat df = new DecimalFormat("#.##");
+        System.out.println();
+        Double amount = Double.valueOf(df.format((gm * exclusiveGoldRate)+((gm* exclusiveGoldRate)*3)/100));
+        DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.00");
+        String amountSTR  = priceFormat.format(amount);;
+        System.out.println(amount);
+        System.out.println(amountSTR);
+        return amountSTR;
+    }
+
 }

@@ -11,10 +11,8 @@ import pageobject.DigiGoldScreenPO;
 import pageobject.HomeScreenPO;
 import pageobject.LanguageScreenPO;
 import pageobject.LoginSignUpScreenPO;
-import utils.ApiResonseUtils;
-import utils.AssertUtils;
-import utils.PropertyUtils;
-import utils.WaitUtils;
+import utils.*;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +20,9 @@ public class VerifyLanguageScreen extends BaseClass{
     WaitUtils WU_Obj = new WaitUtils();
     AssertUtils AU_Obj = new AssertUtils();
     public final static String LOGIN_MOBILE_NUMBER = PropertyUtils.getProperty("mobilenumber");
-    public String GOLD_LIVE_PRICE;
+    public String GOLD_LIVE_PRICE_IN_GRAM;
+    public Double GOLD_LIVE_PRICE;
+    public Double EXCLUSIVE_GOLD_RATE;
 
     @Test(priority = 0)
     public void to_verify_all_languages_displayed() throws IOException {
@@ -96,9 +96,11 @@ public class VerifyLanguageScreen extends BaseClass{
     public void verify_live_gold_rate() throws IOException {
         HomeScreenPO HS_Obj = new HomeScreenPO(driver);
         ApiResonseUtils.MyGETRequest();
-        GOLD_LIVE_PRICE = HS_Obj.livePrice.getText();
+        GOLD_LIVE_PRICE_IN_GRAM = HS_Obj.livePrice.getText();
+        GOLD_LIVE_PRICE = ApiResonseUtils.goldRate1;
+        EXCLUSIVE_GOLD_RATE = ApiResonseUtils.exclusiveGoldRate;
         AU_Obj.assertText(HS_Obj.livePrice, ApiResonseUtils.goldRateInGram);
-        AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange + " since yesterday");
+        //AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange + " since yesterday");
     }
     @Test(priority = 4)
     public void verify_home_screen_element(){
@@ -150,9 +152,8 @@ public class VerifyLanguageScreen extends BaseClass{
         AU_Obj.isElementDisplayed(DGS_Obj.giftLabel);
         AU_Obj.assertText(DGS_Obj.liveBuyingPriceLabel, "LIVE BUYING PRICE");
         //ApiResonseUtils.MyGETRequest();
-
         //AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, ApiResonseUtils.goldRateInGram);
-        AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, GOLD_LIVE_PRICE);
+        AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, GOLD_LIVE_PRICE_IN_GRAM);
         AU_Obj.assertText(DGS_Obj.priceTextLabel, "This price includes 3% GST, locker charges and insurance");
         Assert.assertEquals(DGS_Obj.buyInRupeesRadioBtn.getAttribute("checked"),"true");
         Assert.assertEquals(DGS_Obj.buyInQuantityRadioBtn.getAttribute("checked"),"false");
@@ -170,6 +171,48 @@ public class VerifyLanguageScreen extends BaseClass{
         AU_Obj.assertText(DGS_Obj.buyOption2, "+ 0.5 gms");
         AU_Obj.assertText(DGS_Obj.buyOption3, "+ 1 gms");
         AU_Obj.assertText(DGS_Obj.buyOption4, "+ 2 gms");
+
+        DGS_Obj.tapOn_BuyInRupeesRadioBtn();
+        DGS_Obj.tapOn_BuyOption1();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "500");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(500,GOLD_LIVE_PRICE)+" gms");
+
+        DGS_Obj.tapOn_BuyOption2();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "1500");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(1500,GOLD_LIVE_PRICE)+" gms");
+
+        DGS_Obj.tapOn_BuyOption3();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "4000");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(4000,GOLD_LIVE_PRICE)+" gms");
+
+        DGS_Obj.tapOn_BuyOption4();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "9000");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= "+CommonUtils.convertAmountintoGm(9000,GOLD_LIVE_PRICE)+" gms");
+
+        DGS_Obj.tapOn_BuyInQuantityRadioBtn();
+        DGS_Obj.tapOn_BuyOption1();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "0.1");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= ₹"+CommonUtils.convertGmintoRupees(0.1,EXCLUSIVE_GOLD_RATE));
+
+        DGS_Obj.tapOn_BuyOption2();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "0.6");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= ₹"+CommonUtils.convertGmintoRupees(0.6,EXCLUSIVE_GOLD_RATE));
+
+        DGS_Obj.tapOn_BuyOption3();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "1.6");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= ₹"+CommonUtils.convertGmintoRupees(1.6,EXCLUSIVE_GOLD_RATE));
+
+        DGS_Obj.tapOn_BuyOption4();
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "3.6");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= ₹"+CommonUtils.convertGmintoRupees(3.6,EXCLUSIVE_GOLD_RATE));
+
+
+
+
+
+
+
+
 
 
 

@@ -16,6 +16,8 @@ public class ApiResonseUtils {
     public static String goldRate;
     public static String goldRateInGram;
     public static String  yesterdayRateChange;
+    public static Double goldRate1;
+    public static Double exclusiveGoldRate; //buyPrice
 
     public static void MyGETRequest() throws IOException {
 
@@ -36,7 +38,8 @@ public class ApiResonseUtils {
             System.out.println("JSON String Result " + response.toString());
             JSONObject jObject = new JSONObject(response.toString());
             JSONObject geoObject = jObject.getJSONObject("result");
-            Double goldRate1 = geoObject.getDouble("gstInclusivePrice");
+            goldRate1 = geoObject.getDouble("gstInclusivePrice");
+            exclusiveGoldRate = geoObject.getDouble("buyPrice");
             String rateChange = geoObject.getString("displayRateChange");
             System.out.println(rateChange);
             DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.00");

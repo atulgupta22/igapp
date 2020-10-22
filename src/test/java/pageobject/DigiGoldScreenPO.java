@@ -38,6 +38,9 @@ public class DigiGoldScreenPO extends BasePO {
     @AndroidFindBy(id = "input_value")
     public AndroidElement inputRupeesQuantityTextBox;
 
+    @AndroidFindBy(id = "textinput_suffix_text")
+    public AndroidElement inputRupeesQuantitySuffixTextBox;
+
     @AndroidFindBy(id = "tv_buy_option_1")
     public AndroidElement buyOption1;
 
@@ -59,6 +62,14 @@ public class DigiGoldScreenPO extends BasePO {
     public void tapOn_BuyInQuantityRadioBtn(){
         buyInQuantityRadioBtn.click();
     }
+    public void tapOn_BuyInRupeesRadioBtn(){
+        buyInRupeesRadioBtn.click();
+    }
+    public void tapOn_BuyOption1(){ buyOption1.click(); }
+    public void tapOn_BuyOption2(){ buyOption2.click(); }
+    public void tapOn_BuyOption3(){ buyOption3.click(); }
+    public void tapOn_BuyOption4(){ buyOption4.click(); }
+
 
 
 }
