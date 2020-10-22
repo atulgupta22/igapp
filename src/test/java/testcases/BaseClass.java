@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 //Responsible for setting up the Appium test Driver
-abstract class BaseClass {
+    public class BaseClass {
     public static AppiumDriver driver;
     public final static String APPIUM_SERVER_URL = PropertyUtils.getProperty("appium.server.url", "http://127.0.0.1:4723/wd/hub");
     public final static int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);

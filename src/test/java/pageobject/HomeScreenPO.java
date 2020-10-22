@@ -60,6 +60,16 @@ public class HomeScreenPO extends BasePO {
     public void tapOn_logInSignUpBtn(){
         logInSignUpBtn.click();
     }
+    public void tapOn_digiGold(){
+        digiGold.click();
+    }
+    public void tapOn_easyGold(){
+        easyGold.click();
+    }
+    public void tapOn_goldLoan(){
+        goldLoan.click();
+    }
+
 
 
 

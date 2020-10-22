@@ -3,9 +3,11 @@ package testcases;
 import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pageobject.DigiGoldScreenPO;
 import pageobject.HomeScreenPO;
 import pageobject.LanguageScreenPO;
 import pageobject.LoginSignUpScreenPO;
@@ -20,7 +22,7 @@ public class VerifyLanguageScreen extends BaseClass{
     WaitUtils WU_Obj = new WaitUtils();
     AssertUtils AU_Obj = new AssertUtils();
     public final static String LOGIN_MOBILE_NUMBER = PropertyUtils.getProperty("mobilenumber");
-
+    public String GOLD_LIVE_PRICE;
 
     @Test(priority = 0)
     public void to_verify_all_languages_displayed() throws IOException {
@@ -94,6 +96,7 @@ public class VerifyLanguageScreen extends BaseClass{
     public void verify_live_gold_rate() throws IOException {
         HomeScreenPO HS_Obj = new HomeScreenPO(driver);
         ApiResonseUtils.MyGETRequest();
+        GOLD_LIVE_PRICE = HS_Obj.livePrice.getText();
         AU_Obj.assertText(HS_Obj.livePrice, ApiResonseUtils.goldRateInGram);
         AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange + " since yesterday");
     }
@@ -116,25 +119,57 @@ public class VerifyLanguageScreen extends BaseClass{
         AU_Obj.isElementDisplayed(HS_Obj.myProfile);
     }
 
-    @Test(priority = 5)
-    public void verify_login_signup_functionality(){
+//    @Test(priority = 5)
+//    public void verify_login_signup_functionality(){
+//        HomeScreenPO HS_Obj = new HomeScreenPO(driver);
+//        LoginSignUpScreenPO LSS_Obj = new LoginSignUpScreenPO(driver);
+//        HS_Obj.tapOn_logInSignUpBtn();
+//        WU_Obj.waitForElementToBeVisible(LSS_Obj.loginSignUpLabel,driver);
+//        AU_Obj.assertText(LSS_Obj.loginSignUpLabel, "Log in or Sign up");
+//        AU_Obj.assertText(LSS_Obj.enterMobileNumberLabel, "Please enter your mobile number to continue");
+//        AU_Obj.assertText(LSS_Obj.continueBtn, "CONTINUE");
+//        AU_Obj.isElementDisplayed(LSS_Obj.enterSameNumberLabel);
+//        LSS_Obj.enterMobileNumer(LOGIN_MOBILE_NUMBER);
+//        LSS_Obj.tapOn_ContinueBtn();
+//        AU_Obj.assertText(LSS_Obj.otpAutoVerificationLabel, "OTP auto-verification");
+//        AU_Obj.assertText(LSS_Obj.otpHasBeenSendToLabel, "OTP has been sent to "+LOGIN_MOBILE_NUMBER+"  ");
+//        AU_Obj.assertText(LSS_Obj.editMobileNumberBtn, "EDIT");
+//        LSS_Obj.enterOTP("999999");
+//        AU_Obj.assertText(LSS_Obj.verifyingOTPLabel, "Verifying OTP automatically");
+//
+//    }
+
+    @Test(priority = 6)
+    public void verify_digigold_screen_functionality() throws IOException {
         HomeScreenPO HS_Obj = new HomeScreenPO(driver);
-        LoginSignUpScreenPO LSS_Obj = new LoginSignUpScreenPO(driver);
-        HS_Obj.tapOn_logInSignUpBtn();
-        WU_Obj.waitForElementToBeVisible(LSS_Obj.loginSignUpLabel,driver);
-        AU_Obj.assertText(LSS_Obj.loginSignUpLabel, "Log in or Sign up");
-        AU_Obj.assertText(LSS_Obj.enterMobileNumberLabel, "Please enter your mobile number to continue");
-        AU_Obj.assertText(LSS_Obj.continueBtn, "CONTINUE");
-        AU_Obj.isElementDisplayed(LSS_Obj.enterSameNumberLabel);
-        LSS_Obj.enterMobileNumer(LOGIN_MOBILE_NUMBER);
-        LSS_Obj.tapOn_ContinueBtn();
-        AU_Obj.assertText(LSS_Obj.otpAutoVerificationLabel, "OTP auto-verification");
-        AU_Obj.assertText(LSS_Obj.otpHasBeenSendToLabel, "OTP has been sent to "+LOGIN_MOBILE_NUMBER+"  ");
-        System.out.println(LOGIN_MOBILE_NUMBER+"abcd");
-        AU_Obj.assertText(LSS_Obj.OTPVerificationText, "OTP verification usually takes less than a minute. Please ensure you are using the same mobile number on this phone as mentioned above. In case there’s a mismatch, tap EDIT and enter the correct number");
-        AU_Obj.assertText(LSS_Obj.editMobileNumberBtn, "EDIT");
-        LSS_Obj.enterOTP("999999");
-        AU_Obj.assertText(LSS_Obj.verifyingOTPLabel, "Verifying OTP automatically");
+        DigiGoldScreenPO DGS_Obj = new DigiGoldScreenPO(driver);
+        HS_Obj.tapOn_digiGold();
+        AU_Obj.isElementDisplayed(DGS_Obj.digiGoldGoldSavingsLabel);
+        AU_Obj.isElementDisplayed(DGS_Obj.savingLabel);
+        AU_Obj.isElementDisplayed(DGS_Obj.lockerLabel);
+        AU_Obj.isElementDisplayed(DGS_Obj.giftLabel);
+        AU_Obj.assertText(DGS_Obj.liveBuyingPriceLabel, "LIVE BUYING PRICE");
+        //ApiResonseUtils.MyGETRequest();
+
+        //AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, ApiResonseUtils.goldRateInGram);
+        AU_Obj.assertText(DGS_Obj.livePriceOnDGScreen, GOLD_LIVE_PRICE);
+        AU_Obj.assertText(DGS_Obj.priceTextLabel, "This price includes 3% GST, locker charges and insurance");
+        Assert.assertEquals(DGS_Obj.buyInRupeesRadioBtn.getAttribute("checked"),"true");
+        Assert.assertEquals(DGS_Obj.buyInQuantityRadioBtn.getAttribute("checked"),"false");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "Amount");
+        AU_Obj.assertText(DGS_Obj.buyOption1, "+ ₹500");
+        AU_Obj.assertText(DGS_Obj.buyOption2, "+ ₹1000");
+        AU_Obj.assertText(DGS_Obj.buyOption3, "+ ₹2500");
+        AU_Obj.assertText(DGS_Obj.buyOption4, "+ ₹5000");
+
+        DGS_Obj.tapOn_BuyInQuantityRadioBtn();
+        Assert.assertEquals(DGS_Obj.buyInRupeesRadioBtn.getAttribute("checked"),"false");
+        Assert.assertEquals(DGS_Obj.buyInQuantityRadioBtn.getAttribute("checked"),"true");
+        AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "Weight");
+        AU_Obj.assertText(DGS_Obj.buyOption1, "+ 0.1 gms");
+        AU_Obj.assertText(DGS_Obj.buyOption2, "+ 0.5 gms");
+        AU_Obj.assertText(DGS_Obj.buyOption3, "+ 1 gms");
+        AU_Obj.assertText(DGS_Obj.buyOption4, "+ 2 gms");
 
 
 
@@ -142,7 +177,6 @@ public class VerifyLanguageScreen extends BaseClass{
 
 
     }
-
 
 
 
