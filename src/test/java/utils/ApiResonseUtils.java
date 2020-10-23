@@ -8,6 +8,7 @@ package utils;
  import java.text.NumberFormat;
  import java.util.Locale;
 
+ import org.apache.commons.lang3.StringUtils;
  import org.json.JSONException;
  import org.json.JSONObject;
 
@@ -42,10 +43,13 @@ public class ApiResonseUtils {
             exclusiveGoldRate = geoObject.getDouble("buyPrice");
             String rateChange = geoObject.getString("displayRateChange");
             System.out.println(rateChange);
-            DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.00");
+            //DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.00");
+            DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.##");
+            //DecimalFormat priceFormat = new DecimalFormat("0.#");
             goldRate = priceFormat.format(goldRate1);
             goldRateInGram = "₹"+goldRate+"/gm";
-            yesterdayRateChange = rateChange.substring(22, 29);
+            //yesterdayRateChange = rateChange.substring(22, 29);
+            yesterdayRateChange = StringUtils.substringBetween(rateChange, "'>", "</");
             System.out.println(goldRateInGram);
             System.out.println(yesterdayRateChange);
         } else {

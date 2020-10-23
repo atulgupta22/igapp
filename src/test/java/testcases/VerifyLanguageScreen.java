@@ -100,7 +100,7 @@ public class VerifyLanguageScreen extends BaseClass{
         GOLD_LIVE_PRICE_FROM_API = ApiResonseUtils.goldRate1;
         EXCLUSIVE_GOLD_RATE = ApiResonseUtils.exclusiveGoldRate;
         AU_Obj.assertText(HS_Obj.livePrice, ApiResonseUtils.goldRateInGram);
-        //AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange + " since yesterday");
+        AU_Obj.assertText(HS_Obj.goldPriceChange, ApiResonseUtils.yesterdayRateChange);
     }
     @Test(priority = 4)
     public void verify_home_screen_element(){

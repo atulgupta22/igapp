@@ -88,7 +88,7 @@ public class CommonUtils {
         DecimalFormat df = new DecimalFormat("#.##");
         System.out.println();
         Double amount = Double.valueOf(df.format((gm * exclusiveGoldRate)+((gm* exclusiveGoldRate)*3)/100));
-        DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.00");
+        DecimalFormat priceFormat = new DecimalFormat("##,##,##,##0.##");
         String amountSTR  = priceFormat.format(amount);;
         System.out.println(amount);
         System.out.println(amountSTR);
