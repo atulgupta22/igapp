@@ -69,6 +69,7 @@ public class DigiGoldScreenPO extends BasePO {
     public void tapOn_BuyOption2(){ buyOption2.click(); }
     public void tapOn_BuyOption3(){ buyOption3.click(); }
     public void tapOn_BuyOption4(){ buyOption4.click(); }
+    public void tapOn_SaveGoldToYourLockerBtn(){ saveGoldToYourLockerBtn.click(); }
 
 
 

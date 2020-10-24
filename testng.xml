@@ -4,7 +4,9 @@
 <suite name="Testing Mobile Apps" verbose="1" >
 <test name="EndToEnd" >
     <classes>
-        <class name="testcases.VerifyLanguageScreen" />
+
+        <class name="testcases.VerifyHomeScreen" />
+        <class name="testcases.VerifyDigiGoldScreen" />
     </classes>
 </test>
 

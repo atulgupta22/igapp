@@ -3,8 +3,10 @@ package utils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.FileInputStream;
@@ -79,7 +81,7 @@ public class CommonUtils {
         return driver;
     }
 
-    public static String convertAmountintoGm(int amount,double goldliveprice){
+    public static String convertAmountintoGm(double amount,double goldliveprice){
         Double gmquantityfourdecimal= ((long)((amount/goldliveprice)*10000)) / 10000.0;
         String gm_qunatitySTR = String.valueOf(gmquantityfourdecimal);
         return gm_qunatitySTR;
@@ -94,5 +96,11 @@ public class CommonUtils {
         System.out.println(amountSTR);
         return amountSTR;
     }
+    public static Double convertStringRateintoRate(String str){
+        String substr = StringUtils.substringBetween(str, "₹", "/gm");
+        double d=Double.parseDouble(substr.replaceAll(",", ""));
+        return d;
+    }
+
 
 }
