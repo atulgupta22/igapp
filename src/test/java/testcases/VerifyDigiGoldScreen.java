@@ -103,6 +103,7 @@ public class VerifyDigiGoldScreen extends BaseClass {
         DGS_Obj.inputRupeesQuantityTextBox.sendKeys("1500");
         DGS_Obj.tapOn_SaveGoldToYourLockerBtn();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WU_Obj.waitForElementToBeVisible(DGCHS_Obj. stateDropdown, driver);
         DGCHS_Obj.tapOn_StateDropdown();
         DGCHS_Obj.tapOn_TotalAmountPayblelabel();
         WU_Obj.waitForElementToBeVisible(DGCHS_Obj.goldValue, driver);
