@@ -36,7 +36,7 @@ public class DGCheckOutScreenPO extends BasePO {
     @AndroidFindBy(id = "tv_amount_payable_string")
     public AndroidElement totalAmountPayblelabel;
 
-    @AndroidFindBy(id = "textinput_placeholder")
+    @AndroidFindBy(id = "text_input_end_icon")
     public AndroidElement stateDropdown;
 
     @AndroidFindBy(id = "btn_checkout")
