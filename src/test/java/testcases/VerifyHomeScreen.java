@@ -18,7 +18,6 @@ public class VerifyHomeScreen extends BaseClass {
     WaitUtils WU_Obj = new WaitUtils();
     AssertUtils AU_Obj = new AssertUtils();
 
-
     @Test(priority = 0)
     public void verify_live_gold_rate() throws IOException {
         LanguageScreenPO LS_Obj = new LanguageScreenPO(driver);

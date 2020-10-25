@@ -101,6 +101,11 @@ public class CommonUtils {
         double d=Double.parseDouble(substr.replaceAll(",", ""));
         return d;
     }
+    public static Double convertStringAmountintoAmount(String str){
+        String substr = str.substring(1);
+        double d=Double.parseDouble(substr.replaceAll(",", ""));
+        return d;
+    }
 
 
 }

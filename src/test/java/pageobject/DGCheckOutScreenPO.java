@@ -42,19 +42,9 @@ public class DGCheckOutScreenPO extends BasePO {
     @AndroidFindBy(id = "btn_checkout")
     public AndroidElement continueToPaymentBtn;
 
-//    @AndroidFindBy(uiAutomator = "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().textContains(\"PUNJAB\").instance(0))")
-//    public AndroidElement punjabState;
-//
-//    @AndroidFindBy(uiAutomator = "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().textContains(\"HARYANA\").instance(0))")
-//    public AndroidElement haryanaState;
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='DELHI']")
-    public AndroidElement delhiState;
-
 
     public void tapOn_StateDropdown(){ stateDropdown.click(); }
-//    public void tapOn_PunjabState(){ punjabState.click(); }
-//    public void tapOn_HaryanaState(){ haryanaState.click(); }
-    public void tapOn_DelhiState(){ delhiState.click(); }
+
     public void tapOn_ContinueToPaymentBtn(){ continueToPaymentBtn.click(); }
 
     public void tapOn_TotalAmountPayblelabel(){ totalAmountPayblelabel.click(); }

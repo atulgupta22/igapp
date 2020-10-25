@@ -2,15 +2,14 @@ package testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageobject.DigiGoldScreenPO;
-import pageobject.HomeScreenPO;
-import pageobject.LanguageScreenPO;
+import pageobject.*;
 import utils.ApiResonseUtils;
 import utils.AssertUtils;
 import utils.CommonUtils;
 import utils.WaitUtils;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class VerifyDigiGoldScreen extends BaseClass {
 
@@ -31,7 +30,6 @@ public class VerifyDigiGoldScreen extends BaseClass {
         ApiResonseUtils.MyGETRequest();
         EXCLUSIVE_GOLD_RATE = ApiResonseUtils.exclusiveGoldRate;
         GOLD_LIVE_PRICE_FROM_API = ApiResonseUtils.goldRate1;
-
         HS_Obj.tapOn_digiGold();
         AU_Obj.isElementDisplayed(DGS_Obj.digiGoldGoldSavingsLabel);
         AU_Obj.isElementDisplayed(DGS_Obj.savingLabel);
@@ -93,6 +91,32 @@ public class VerifyDigiGoldScreen extends BaseClass {
         AU_Obj.assertText(DGS_Obj.inputRupeesQuantityTextBox, "3.6");
         AU_Obj.assertText(DGS_Obj.inputRupeesQuantitySuffixTextBox, "= ₹"+CommonUtils.convertGmintoRupees(3.6,EXCLUSIVE_GOLD_RATE));
         AU_Obj.assertText(DGS_Obj.saveGoldToYourLockerBtn, "SAVE GOLD TO YOUR LOCKER");
-
+    }
+    @Test(priority = 1)
+    public void verify_digigold_buy_functionality_in_amount() {
+        HomeScreenPO HS_Obj = new HomeScreenPO(driver);
+        LoginSignUpScreenPO LSS_Obj = new LoginSignUpScreenPO(driver);
+        DigiGoldScreenPO DGS_Obj = new DigiGoldScreenPO(driver);
+        DGCheckOutScreenPO DGCHS_Obj = new DGCheckOutScreenPO(driver);
+        HS_Obj.tapOn_digiGold();
+        DGS_Obj.tapOn_BuyInRupeesRadioBtn();
+        DGS_Obj.inputRupeesQuantityTextBox.sendKeys("1500");
+        DGS_Obj.tapOn_SaveGoldToYourLockerBtn();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        DGCHS_Obj.tapOn_StateDropdown();
+        DGCHS_Obj.tapOn_TotalAmountPayblelabel();
+        WU_Obj.waitForElementToBeVisible(DGCHS_Obj.goldValue, driver);
+        String live_rate_in_checkout_screen = (DGS_Obj.livePriceOnDGScreen).getText();
+        //System.out.println("test"+live_rate_in_checkout_screen);
+        AU_Obj.assertText(DGCHS_Obj.goldQuantity, CommonUtils.convertAmountintoGm(1500, CommonUtils.convertStringRateintoRate(live_rate_in_checkout_screen)) + " gms");
+        String gold_value = (DGCHS_Obj.goldValue).getText();
+        String GST_amount = (DGCHS_Obj.GSTAmount.getText());
+        Assert.assertEquals(1500,CommonUtils.convertStringAmountintoAmount(gold_value)+CommonUtils.convertStringAmountintoAmount(GST_amount));
+//        System.out.println(CommonUtils.convertStringAmountintoAmount(DGCHS_Obj.goldValue.getText()));
+//        System.out.println(CommonUtils.convertStringAmountintoAmount(DGCHS_Obj.GSTAmount.getText()));
+//        System.out.println(CommonUtils.convertStringRateintoRate(live_rate_in_checkout_screen));
+//        System.out.println(CommonUtils.convertAmountintoGm(1500, CommonUtils.convertStringRateintoRate(live_rate_in_checkout_screen)) + " gms");
+         DGCHS_Obj.tapOn_ContinueToPaymentBtn();
+        WU_Obj.waitForElementToBeVisible(LSS_Obj.loginSignUpLabel,driver);
     }
 }

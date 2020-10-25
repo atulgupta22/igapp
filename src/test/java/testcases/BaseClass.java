@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 
     //It will set the DesiredCapabilities for the local execution
 
-    private void setDesiredCapabilitiesForAndroid(DesiredCapabilities desiredCapabilities) {
+    public void setDesiredCapabilitiesForAndroid(DesiredCapabilities desiredCapabilities) {
         String PLATFORM_NAME = PropertyUtils.getProperty("android.platform");
         String PLATFORM_VERSION = PropertyUtils.getProperty("android.platform.version");
         String APP_NAME = PropertyUtils.getProperty("android.app.name");
@@ -94,7 +94,7 @@ import java.util.concurrent.TimeUnit;
 //        return augmentedDriver;
 //    }
 
-    private static void setTimeOuts(AppiumDriver driver) {
+    public static void setTimeOuts(AppiumDriver driver) {
         //Use a higher value if your mobile elements take time to show up
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
     }
@@ -106,7 +106,7 @@ import java.util.concurrent.TimeUnit;
 
     //This will quite the android driver instance
 
-    private void quitDriver() {
+    public void quitDriver() {
         try {
             this.driver.quit();
         } catch (Exception e) {

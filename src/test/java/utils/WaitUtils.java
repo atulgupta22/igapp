@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WaitUtils {
 
-    public final int explicitWaitDefault = PropertyUtils.getIntegerProperty("explicitWait", 10);
+    public final int explicitWaitDefault = PropertyUtils.getIntegerProperty("explicitWait", 20);
 
     public void staticWait(final long millis) {
         try {
